@@ -139,7 +139,7 @@ static void echo_prompt(const shell_obj_t *sh)
 
 static void parse_argv(shell_obj_t *sh)
 {
-    volatile char *token;
+    char *token;
 
     /*! strtok is not thread safety*/
 
