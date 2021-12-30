@@ -113,9 +113,7 @@ static inline void write_string(const shell_obj_t *sh, const char *buffer)
     sh->write(buffer, strlen(buffer));
 }
 
-static inline void write_bytes(const shell_obj_t *sh,
-                               const char *buffer,
-                               uint32_t wSize)
+static inline void write_bytes(const shell_obj_t *sh, const char *buffer, uint32_t wSize)
 {
     sh->write(buffer, wSize);
 }

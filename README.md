@@ -2,7 +2,10 @@
 
 ![shell](https://iobucket.oss-cn-beijing.aliyuncs.com/images/shell.png)
 
-`c shell` 是一个运行在单片机环境下的嵌入式 `shell`
+`c shell` 是一个运行在单片机环境下的嵌入式 `shell`, 只有最简单的注册命令，执行命令功能
+
+* 不支持 `tab` 键补全命令
+* 上下键历史命令功能待添加
 
 ## 使用方法
 
