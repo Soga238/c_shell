@@ -11,32 +11,28 @@
  * See the Mulan PSL v2 for more details.                                   *
  *                                                                          *
  ***************************************************************************/
+#ifndef C_SHELL_CFG_H
+#define C_SHELL_CFG_H
+
 /* Includes --------------------------------------------------------*/
-#include "c_shell.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+/* Global define ---------------------------------------------------*/
+#define SHELL_SHOW_INFORMATION          1
+#define SHELL_MAXIMUM_USERNAME_SIZE     16
+
+/*! 包含命令名在内，命令行最大参数个数，不能小于 1 */
+#define SHELL_MAXIMUM_PARAM_NUMBER      4
+
+/* Global macro ----------------------------------------------------*/
+/* Global typedef --------------------------------------------------*/
 /* Global variables ------------------------------------------------*/
-const int32_t g_nShellCommandNumber = 10;
-const shell_command_t g_tShellCommands[g_nShellCommandNumber] = {
-    {
-        .tType = SHELL_COMMAND_FN_PTR_MAIN,
-        .name = "ls",
-        .desc = "list dir",
-        .pfn = 0
-    }, {
-        .tType = SHELL_COMMAND_FN_PTR_KEY,
-        .name = "Enter",
-        .desc = "Enter",
-        .nKeyValue = 0x0d,
-        .pfn = 0,
-    }
-};
+/* Global function prototypes --------------------------------------*/
 
-/* Private typedef -------------------------------------------------*/
-/* Private define --------------------------------------------------*/
-/* Private macro ---------------------------------------------------*/
-/* Private variables -----------------------------------------------*/
-/* Private function prototypes -------------------------------------*/
-/* Private functions -----------------------------------------------*/
-
-
+#ifdef __cplusplus
+extern "C" {
+#endif
+#endif
 /*************************** End of file ****************************/

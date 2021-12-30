@@ -15,12 +15,16 @@
 #define C_SHELL_H
 
 /* Includes --------------------------------------------------------*/
+#include "c_shell_cfg.h"
 #include "stdint.h"
+#include "stdbool.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Global define ---------------------------------------------------*/
+#define C_SHELL_VERSION     "1.0.0"
+
 /* Global macro ----------------------------------------------------*/
 /* Global typedef --------------------------------------------------*/
 typedef struct shell_command shell_command_t;
@@ -29,35 +33,70 @@ struct shell_command {
     const char *desc;
     union {
         void  (*pfn     );
-        void  (*pfnMain )    (char argc, char *argv);
+        void  (*pfnMain )    (void *, char argc, char *argv[]);
         void  (*pfnKey  )    (void *);
     };
 
-    int32_t nKeyValue;
+    int32_t nKeyCode;
 
     enum {
-        SHELL_COMMAND_FN_PTR_MAIN = 0,
+        SHELL_COMMAND_FN_PTR_MAIN = 1,
         SHELL_COMMAND_FN_PTR_KEY,
     } tType;
 
 };
 
-typedef struct shell_obj shell_obj_t;
-struct shell_obj {
-    const shell_command_t   *ptBase;
-    int32_t          nCommandNumber;
+typedef struct shell_cfg shell_cfg_t;
+struct shell_cfg {
+    uint32_t    ( *read    )(char *buffer, uint32_t wSize);
+    uint32_t    ( *write   )(const char *buffer, uint32_t wSize);
+    bool        ( *login   )(const char *username, const char *password);
+    void        ( *lock    )(void *sh);
+    void        ( *unlock  )(void *sh);
 
+    char                  *username;
     char                    *buffer;
     int32_t             nBufferSize;
 
-    char                  *username;
-    char                  *password;
+    const shell_command_t   *ptBase;
+    int32_t          nCommandNumber;
+};
+
+typedef struct shell_obj shell_obj_t;
+struct shell_obj {
+    uint32_t    ( *read    )(char *buffer, uint32_t wSize);
+    uint32_t    ( *write   )(const char *buffer, uint32_t wSize);
+    bool        ( *login   )(const char *username, const char *password);
+
+    void        ( *lock    )(void *sh);
+    void        ( *unlock  )(void *sh);
+
+    char                   username[SHELL_MAXIMUM_USERNAME_SIZE];
+
+    const shell_command_t   *ptBase;
+    int32_t          nCommandNumber;
+
+    int32_t            nControlCode;
+
+    char                    *buffer;
+    int32_t             nBufferSize;
+    int32_t                 nLength;
+    int32_t                 nCursor;
+
+    char                      *argv[SHELL_MAXIMUM_PARAM_NUMBER];
+    char                       argc;
+
+    bool           bIsOverlayInsert;
+    bool                    bInited;
+    bool                   bIsLogin;
+
 };
 
 /* Global variables ------------------------------------------------*/
 /* Global function prototypes --------------------------------------*/
-extern void shell_init(shell_obj_t *sh, char *buffer, int32_t nBufferSize);
-void shell_handler(shell_obj_t *sh, char data);
+extern void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg);
+extern void shell_task(shell_obj_t *sh);
+extern void shell_write(const shell_obj_t *sh, const char *buffer, int32_t nSize);
 
 #ifdef __cplusplus
 extern "C" {
