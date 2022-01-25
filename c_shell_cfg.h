@@ -26,6 +26,12 @@ extern "C" {
 /*! 包含命令名在内，命令行最大参数个数，不能小于 1 */
 #define SHELL_MAXIMUM_PARAM_NUMBER      4
 
+/*! 历史记录条数，建议不超过 5 */
+#define SHELL_MAXIMUM_HISTORY_NUMER     3
+#if (SHELL_MAXIMUM_HISTORY_NUMER > 0)
+    #define SHELL_HISTORY_ENABLED
+#endif
+
 /* Global macro ----------------------------------------------------*/
 /* Global typedef --------------------------------------------------*/
 /* Global variables ------------------------------------------------*/
