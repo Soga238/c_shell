@@ -43,6 +43,7 @@ static const char *c_information =
     "| |       \\___ \\|  __  |  __| | |    | |\r\n"
     "| |____   ____) | |  | | |____| |____| |____\r\n"
     " \\_____| |_____/|_|  |_|______|______|______|\r\n"
+    "\r\n"
     "Build:\t\t"__DATE__" "__TIME__"\r\n"
     "Version:\t"C_SHELL_VERSION"\r\n"
     "Copyright:\thttps://github.com/Soga238/c_shell\r\n";
@@ -130,9 +131,24 @@ const char *error_text(enum shell_ret_t tRet)
 
 static void echo_prompt(const shell_obj_t *sh)
 {
-    write_string(sh, "\r\n");
+    write_bytes(sh, "\r\n", 2);
     write_string(sh, sh->username);
     write_bytes(sh, ":/$", 2);
+}
+
+static void clear_command_line(shell_obj_t *sh, int32_t nLength)
+{
+    const char buf[10] = "\b\b\b\b\b\b\b\b\b\b";
+    volatile int32_t i;
+
+    /*! 减少传送次数 */
+    i = nLength / 10;
+    while (i-- > 0) {
+        write_bytes(sh, buf, 10);
+    }
+
+    i = nLength % 10;
+    write_bytes(sh, buf, i);
 }
 
 static void parse_argv(shell_obj_t *sh)
@@ -232,14 +248,67 @@ static bool execute_key_command(shell_obj_t *sh, int32_t nKeyCode)
     return false;
 }
 
+#if defined(SHELL_HISTORY_ENABLED)
+static void add_history(shell_obj_t *sh)
+{
+    char *buf;
+
+    if (sh->nLength == 0) {
+        return;
+    }
+
+    buf = sh->tHistory.buffer[sh->tHistory.nTail];
+    memcpy(buf, sh->buffer, sh->nLength);
+    *(buf + sh->nLength) = 0;
+
+    sh->tHistory.nTail = (sh->tHistory.nTail + 1) % SHELL_MAXIMUM_HISTORY_NUMER;
+    if (sh->tHistory.nTotal < SHELL_MAXIMUM_HISTORY_NUMER) {
+        sh->tHistory.nTotal += 1;
+    }
+}
+
+static const char *get_history(shell_obj_t *sh, bool bIsUp)
+{
+    char *buf = NULL;
+
+    if (sh->tHistory.nTotal <= 0) {
+        return buf;
+    } else if (sh->tHistory.nCursor == -1) {
+        sh->tHistory.nCursor = sh->tHistory.nTail;
+    }
+
+    sh->tHistory.nCursor = bIsUp ?
+                           (sh->tHistory.nCursor - 1 + sh->tHistory.nTotal) % sh->tHistory.nTotal :
+                           (sh->tHistory.nCursor + 1) % sh->tHistory.nTotal;
+
+    buf = sh->tHistory.buffer[sh->tHistory.nCursor];
+
+    return buf;
+}
+
+#endif
 static void on_key_up_arrow(shell_obj_t *sh)
 {
+#if defined(SHELL_HISTORY_ENABLED)
+    const char *p = get_history(sh, true);
+    if (NULL != p) {
+        clear_command_line(sh, sh->nLength);
+    }
+#else
     UNUSED_PARAM(sh);
+#endif
 }
 
 static void on_key_down_arrow(shell_obj_t *sh)
 {
+#if defined(SHELL_HISTORY_ENABLED)
+    const char *p = get_history(sh, false);
+    if (NULL != p) {
+        write_string(sh, p);
+    }
+#else
     UNUSED_PARAM(sh);
+#endif
 }
 
 static void on_key_right_arrow(shell_obj_t *sh)
@@ -276,6 +345,10 @@ static bool login_required(shell_obj_t *sh)
 
 static void on_key_enter(shell_obj_t *sh)
 {
+#if defined(SHELL_HISTORY_ENABLED)
+    add_history(sh);
+#endif
+
     if (login_required(sh)) {
         execute_main_command(sh);
         echo_prompt(sh);
@@ -289,7 +362,6 @@ static void on_key_insert(shell_obj_t *sh)
 
 static void on_key_backspace(shell_obj_t *sh)
 {
-    const char buf[10] = "\b\b\b\b\b\b\b\b\b\b";
     volatile int32_t i;
 
     if (sh->nCursor > 0) {
@@ -297,13 +369,7 @@ static void on_key_backspace(shell_obj_t *sh)
         write_bytes(sh, sh->buffer + sh->nCursor, sh->nLength - sh->nCursor);
         write_bytes(sh, " ", 1);
 
-        i = (sh->nLength - sh->nCursor + 1) / 10;
-        while (i-- > 0) {
-            write_bytes(sh, buf, 10);
-        }
-
-        i = (sh->nLength - sh->nCursor + 1) % 10;
-        write_bytes(sh, buf, i);
+        clear_command_line(sh, sh->nLength - sh->nCursor + 1);
 
         sh->nCursor -= 1;
         sh->nLength -= 1;
@@ -374,7 +440,6 @@ static void normal_key_code_overlay_insert(shell_obj_t *sh, char c)
 
 static void normal_key_code_insert(shell_obj_t *sh, char c)
 {
-    const char buf[10] = "\b\b\b\b\b\b\b\b\b\b";
     volatile int32_t i;
 
     /*! 尾部保留一个字节填充 0 */
@@ -399,19 +464,12 @@ static void normal_key_code_insert(shell_obj_t *sh, char c)
         sh->buffer[sh->nLength + 1] = 0;
         sh->nLength += 1;
         sh->nCursor += 1;
-        //        sh->buffer[sh->nLength] = 0;
+        // sh->buffer[sh->nLength] = 0;
 
         i = sh->nLength - sh->nCursor;
         write_bytes(sh, sh->buffer + sh->nCursor - 1, i + 1);
 
-        /*! 减少传送次数 */
-        i = (sh->nLength - sh->nCursor) / 10;
-        while (i-- > 0) {
-            write_bytes(sh, buf, 10);
-        }
-
-        i = (sh->nLength - sh->nCursor) % 10;
-        write_bytes(sh, buf, i);
+        clear_command_line(sh, sh->nLength - sh->nCursor);
     }
 }
 
@@ -473,9 +531,8 @@ void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
     if (NULL != sh) {
         sh->bInited = false;
 
-        if (NULL == ptCfg ||
-            NULL == ptCfg->read || NULL == ptCfg->write ||
-            NULL == ptCfg->buffer || 0 == ptCfg->nBufferSize) {
+        if (NULL == ptCfg || NULL == ptCfg->read || NULL == ptCfg->write ||
+            NULL == ptCfg->buffer) {
             return;
         }
 
@@ -493,7 +550,23 @@ void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
         sh->unlock = ptCfg->unlock;
 
         sh->buffer = ptCfg->buffer;
+#if defined(SHELL_HISTORY_ENABLED)
+        sh->tHistory.nTotal = 0;
+        sh->tHistory.nTail = 0;
+        sh->tHistory.nCursor = -1; /*! invalid value */
+        sh->nBufferSize =
+            ptCfg->nBufferSize / (1 + SHELL_MAXIMUM_HISTORY_NUMER);
+        for (int32_t i = 0; i < SHELL_MAXIMUM_HISTORY_NUMER; ++i) {
+            sh->tHistory.buffer[i] = sh->buffer + (i + 1) * sh->nBufferSize;
+        }
+#else
         sh->nBufferSize = ptCfg->nBufferSize;
+#endif
+
+        if (0 == ptCfg->nBufferSize) {
+            return;
+        }
+
         sh->nLength = 0;
         sh->nCursor = 0;
 

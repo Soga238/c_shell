@@ -83,6 +83,16 @@ struct shell_obj {
     int32_t                 nLength;
     int32_t                 nCursor;
 
+#if defined(SHELL_HISTORY_ENABLED)
+    struct {
+        char                *buffer[SHELL_MAXIMUM_HISTORY_NUMER];
+        int32_t              nTotal;
+        int32_t             nCursor;
+        int32_t               nTail;
+    } tHistory;
+
+#endif
+
     char                      *argv[SHELL_MAXIMUM_PARAM_NUMBER];
     char                       argc;
 
