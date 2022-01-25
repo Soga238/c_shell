@@ -24,7 +24,10 @@ extern "C" {
 #define SHELL_MAXIMUM_USERNAME_SIZE     16
 
 /*! 包含命令名在内，命令行最大参数个数，不能小于 1 */
-#define SHELL_MAXIMUM_PARAM_NUMBER      4
+#define SHELL_MAXIMUM_PARAM_NUMBER      3
+#if (SHELL_MAXIMUM_PARAM_NUMBER <= 0)
+#error "SHELL_MAXIMUM_PARAM_NUMBER < 0"
+#endif
 
 /*! 历史记录条数，建议不超过 5 */
 #define SHELL_MAXIMUM_HISTORY_NUMER     3
