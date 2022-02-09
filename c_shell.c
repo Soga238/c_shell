@@ -33,8 +33,18 @@ enum shell_ret_t {
 #define COUNT_OF(__ARR) (sizeof(__ARR)/sizeof((__ARR)[0]))
 #endif
 
+#if (C_SHELL_EXPORT_COMMAND_ENABLE == 1)
+    #if defined(__CC_ARM) || (defined(__ARMCC_VERSION) && __ARMCC_VERSION >= 6000000)
+        extern const unsigned int section_command$$Base;
+        extern const unsigned int section_command$$Limit;
+    #elif defined(__GNUC__)
+        extern const unsigned int _section_command_start;
+        extern const unsigned int _section_command_end;
+    #endif
+#endif
+
 /* Private variables -----------------------------------------------*/
-#if (SHELL_SHOW_INFORMATION == 1)
+#if (C_SHELL_SHOW_INFORMATION == 1)
 static const char *c_information =
     "\r\n"
     "  _____    _____ _    _ ______ _      _\r\n"
@@ -131,9 +141,9 @@ const char *error_text(enum shell_ret_t tRet)
 
 static void echo_prompt(const shell_obj_t *sh)
 {
-    write_bytes(sh, "\r\n", 2);
+    write_bytes(sh, "\n\r", 2);
     write_string(sh, sh->username);
-    write_bytes(sh, ":/$", 2);
+    write_bytes(sh, ":/ ", 3);
 }
 
 static void write_fixed_number_char(shell_obj_t *sh, const char (*string)[10], uint32_t wSize)
@@ -191,7 +201,8 @@ static const shell_command_t *get_command(const char *name,
 
     for (int32_t i = 0; i < nSize; ++i) {
         ptCmd = ptBuffer + i;
-        if (ptCmd->tType == SHELL_COMMAND_FN_PTR_MAIN) {
+        if (ptCmd->tType == SHELL_COMMAND_FN_PTR_MAIN ||
+            ptCmd->tType == SHELL_COMMAND_FN_PTR_C_MAIN) {
             _name = ptCmd->name != NULL ? ptCmd->name : "";
             if (0 == strcmp(name, _name)) {
                 return ptCmd;
@@ -221,7 +232,11 @@ static void execute_main_command(shell_obj_t *sh)
     }
 
     if (NULL != ptCmd) {
-        ptCmd->pfnMain(sh, sh->argc, sh->argv);
+        if (ptCmd->tType == SHELL_COMMAND_FN_PTR_MAIN) {
+            ptCmd->pfnMain(sh, sh->argc, sh->argv);
+        } else {
+            ptCmd->pfnCMain(sh->argc, sh->argv);
+        }
         bFound = true;
     }
 
@@ -234,6 +249,7 @@ static void execute_main_command(shell_obj_t *sh)
 
 static bool execute_key_command(shell_obj_t *sh, int32_t nKeyCode)
 {
+    const char tb[4] = {0, 8, 16, 24};
     const shell_command_t *ptCmd;
     int32_t i, nMask;
 
@@ -245,7 +261,7 @@ static bool execute_key_command(shell_obj_t *sh, int32_t nKeyCode)
         }
 
         for (char j = 0; j < 4; ++j) {
-            nMask = (int32_t) (0xFFFFFFFF >> (8 * j)) & nKeyCode;
+            nMask = (int32_t)(0xFFFFFFFF >> tb[j]) & nKeyCode;
             if (ptCmd->nKeyCode == nMask && ptCmd->pfnKey) {
                 ptCmd->pfnKey(sh);
                 return true;
@@ -309,7 +325,7 @@ static void normal_key_code_insert(shell_obj_t *sh, char c)
     }
 }
 
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
 static void add_history(shell_obj_t *sh)
 {
     char *buf;
@@ -322,8 +338,8 @@ static void add_history(shell_obj_t *sh)
     memcpy(buf, sh->buffer, sh->nLength);
     *(buf + sh->nLength) = 0;
 
-    sh->tHistory.nTail = (sh->tHistory.nTail + 1) % SHELL_MAXIMUM_HISTORY_NUMER;
-    if (sh->tHistory.nTotal < SHELL_MAXIMUM_HISTORY_NUMER) {
+    sh->tHistory.nTail = (sh->tHistory.nTail + 1) % C_SHELL_MAXIMUM_HISTORY_NUMER;
+    if (sh->tHistory.nTotal < C_SHELL_MAXIMUM_HISTORY_NUMER) {
         sh->tHistory.nTotal += 1;
     }
 }
@@ -360,7 +376,7 @@ static void clear_command_line(shell_obj_t *sh)
 
 static void on_key_up_arrow(shell_obj_t *sh)
 {
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
     const char *p = get_history(sh, true);
 
     if (NULL != p) {
@@ -378,7 +394,7 @@ static void on_key_up_arrow(shell_obj_t *sh)
 
 static void on_key_down_arrow(shell_obj_t *sh)
 {
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
     const char *p = get_history(sh, false);
 
     if (NULL != p) {
@@ -415,7 +431,7 @@ static bool login_required(shell_obj_t *sh)
         sh->bIsLogin = (NULL != sh->login) ? sh->login(sh->username, sh->buffer) : true;
         sh->nCursor = sh->nLength = 0;
         if (sh->bIsLogin) {
-#if (SHELL_SHOW_INFORMATION == 1)
+#if (C_SHELL_SHOW_INFORMATION == 1)
             write_string(sh, c_information);
 #endif
         } else {
@@ -428,7 +444,7 @@ static bool login_required(shell_obj_t *sh)
 
 static void on_key_enter(shell_obj_t *sh)
 {
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
     add_history(sh);
 #endif
 
@@ -482,13 +498,14 @@ static void on_command_list_all(shell_obj_t *sh, char argc, char *argv[])
     write_bytes(sh, "\r\ncommands:\r\n", 13);
     for (int32_t i = 0; i < COUNT_OF(s_tCommands); ++i) {
         ptCmd = s_tCommands + i;
-        if (ptCmd->tType == SHELL_COMMAND_FN_PTR_MAIN) {
+        if (ptCmd->tType != SHELL_COMMAND_FN_PTR_KEY) {
             print_command(sh, ptCmd);
         }
     }
+
     for (int32_t i = 0; i < sh->nCommandNumber && NULL != sh->ptBase; ++i) {
         ptCmd = sh->ptBase + i;
-        if (ptCmd->tType == SHELL_COMMAND_FN_PTR_MAIN) {
+        if (ptCmd->tType != SHELL_COMMAND_FN_PTR_KEY) {
             print_command(sh, ptCmd);
         }
     }
@@ -541,10 +558,17 @@ void shell_task(shell_obj_t *sh)
     char buffer[32];
 
     if (NULL != sh && sh->bInited) {
-        wCount = sh->read(buffer, sizeof(buffer));
+        wCount = NULL != sh->read ? sh->read(buffer, sizeof(buffer)) : 0;
         for (i = 0; i < wCount; ++i) {
             shell_handler(sh, buffer[i]);
         }
+    }
+}
+
+void shell_task_on_callback(shell_obj_t *sh, char c)
+{
+    if (NULL != sh && sh->bInited) {
+        shell_handler(sh, c);
     }
 }
 
@@ -555,22 +579,34 @@ void shell_write(const shell_obj_t *sh, const char *buffer, int32_t nSize)
     }
 }
 
-void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
+bool shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
 {
     if (NULL != sh) {
         sh->bInited = false;
 
-        if (NULL == ptCfg || NULL == ptCfg->read || NULL == ptCfg->write ||
+        if (NULL == ptCfg || NULL == ptCfg->write ||
             NULL == ptCfg->buffer) {
-            return;
+            return false;
         }
 
         if (NULL != ptCfg->username) {
             snprintf(sh->username, sizeof(sh->username), "%s", ptCfg->username);
         }
 
+#if (C_SHELL_EXPORT_COMMAND_ENABLE == 0)
         sh->ptBase = ptCfg->ptBase;
         sh->nCommandNumber = ptCfg->nCommandNumber;
+#else
+    #if defined(__CC_ARM) || (defined(__ARMCC_VERSION) && __ARMCC_VERSION >= 6000000)
+        sh->ptBase = (shell_command_t *)(&section_command$$Base);
+        sh->nCommandNumber = ((unsigned)(&section_command$$Limit) - (unsigned)(&section_command$$Base)) / sizeof(shell_command_t);
+    #elif defined(__GNUC__)
+        sh->ptBase = (shell_command_t *)(&_section_command_start);
+        sh->nCommandNumber = ((unsigned)(&_section_command_end) - (unsigned)(&_section_command_start)) / sizeof(shell_command_t);
+    #else
+        #error "nonsupport compiler"
+    #endif
+#endif
 
         sh->write = ptCfg->write;
         sh->read = ptCfg->read;
@@ -579,13 +615,13 @@ void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
         sh->unlock = ptCfg->unlock;
 
         sh->buffer = ptCfg->buffer;
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
         sh->tHistory.nTotal = 0;
         sh->tHistory.nTail = 0;
         sh->tHistory.nCursor = -1; /*! invalid value */
         sh->nBufferSize =
-            ptCfg->nBufferSize / (1 + SHELL_MAXIMUM_HISTORY_NUMER);
-        for (int32_t i = 0; i < SHELL_MAXIMUM_HISTORY_NUMER; ++i) {
+            ptCfg->nBufferSize / (1 + C_SHELL_MAXIMUM_HISTORY_NUMER);
+        for (int32_t i = 0; i < C_SHELL_MAXIMUM_HISTORY_NUMER; ++i) {
             sh->tHistory.buffer[i] = sh->buffer + (i + 1) * sh->nBufferSize;
         }
 #else
@@ -593,7 +629,7 @@ void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
 #endif
 
         if (0 == ptCfg->nBufferSize) {
-            return;
+            return false;
         }
 
         sh->nLength = 0;
@@ -605,6 +641,8 @@ void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
 
         sh->bInited = true;
     }
+    
+    return sh->bInited;
 }
 
 /*************************** End of file ****************************/

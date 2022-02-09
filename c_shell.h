@@ -25,22 +25,63 @@ extern "C" {
 /* Global define ---------------------------------------------------*/
 #define C_SHELL_VERSION     "1.0.0"
 
+#if !defined(__GNUC__)
+#define __GNUC__
+#endif
 /* Global macro ----------------------------------------------------*/
+#if !defined(C_SHELL_SECTION)
+    #if defined(__ARMCC_VERSION)
+        #define C_SHELL_SECTION(__A)    __attribute__((section(__A)))
+    #elif defined(__GNUC__)
+        #define C_SHELL_SECTION(__A)    __attribute__((section(__A)))
+    #else
+        #define C_SHELL_SECTION(__A)
+    #endif
+#endif
+
+#ifndef C_SHELL_USED
+    #if defined(__ARMCC_VERSION)
+        #define C_SHELL_USED          __attribute__((used))
+    #elif defined(__GNUC__)
+        #define C_SHELL_USED          __attribute__((used))
+    #else
+        #define C_SHELL_USED
+    #endif
+#endif
+
+#if (C_SHELL_EXPORT_COMMAND_ENABLE == 1)
+    #define C_SHELL_EXPORT_COMMAND(__FUNC, __NAME, __RESERVED, __DESC)  \
+        static const char shell_command_name_##__NAME[] = #__NAME;      \
+        static const char shell_command_desc_##__NAME[] = #__DESC;      \
+        C_SHELL_USED const shell_command_t shell_command_obj_##__NAME   \
+        C_SHELL_SECTION("section_command") = {                          \
+            .tType = SHELL_COMMAND_FN_PTR_MAIN,                         \
+            .name = shell_command_name_##__NAME,                        \
+            .desc = shell_command_desc_##__NAME,                        \
+            .pfnMain = __FUNC                                           \
+        }
+#else
+    #define C_SHELL_EXPORT_COMMAND(__FUNC, __NAME, __ATTR, __DESC)
+#endif
+
 /* Global typedef --------------------------------------------------*/
+typedef struct shell_obj shell_obj_t;
 typedef struct shell_command shell_command_t;
 struct shell_command {
     const char *name;
     const char *desc;
     union {
         void  (*pfn     );
-        void  (*pfnMain )    (void *, char argc, char *argv[]);
-        void  (*pfnKey  )    (void *);
+        void  (*pfnMain )    (shell_obj_t *, int argc, char *argv[]);
+        void  (*pfnCMain)    (               int argc, char *argv[]);
+        void  (*pfnKey  )    (shell_obj_t *);
     };
 
     int32_t nKeyCode;
 
     enum {
         SHELL_COMMAND_FN_PTR_MAIN = 1,
+        SHELL_COMMAND_FN_PTR_C_MAIN,
         SHELL_COMMAND_FN_PTR_KEY,
     } tType;
 
@@ -58,8 +99,10 @@ struct shell_cfg {
     char                    *buffer;
     int32_t             nBufferSize;
 
+#if (C_SHELL_EXPORT_COMMAND_ENABLE == 0)
     const shell_command_t   *ptBase;
     int32_t          nCommandNumber;
+#endif
 };
 
 typedef struct shell_obj shell_obj_t;
@@ -71,7 +114,7 @@ struct shell_obj {
     void        ( *lock    )(void *sh);
     void        ( *unlock  )(void *sh);
 
-    char                   username[SHELL_MAXIMUM_USERNAME_SIZE];
+    char                   username[C_SHELL_MAXIMUM_USERNAME_SIZE];
 
     const shell_command_t   *ptBase;
     int32_t          nCommandNumber;
@@ -83,17 +126,16 @@ struct shell_obj {
     int32_t                 nLength;
     int32_t                 nCursor;
 
-#if defined(SHELL_HISTORY_ENABLED)
+#if (C_SHELL_HISTORY_ENABLE == 1)
     struct {
-        char                *buffer[SHELL_MAXIMUM_HISTORY_NUMER];
+        char                *buffer[C_SHELL_MAXIMUM_HISTORY_NUMER];
         int32_t              nTotal;
         int32_t             nCursor;
         int32_t               nTail;
     } tHistory;
-
 #endif
 
-    char                      *argv[SHELL_MAXIMUM_PARAM_NUMBER];
+    char                      *argv[C_SHELL_MAXIMUM_PARAM_NUMBER];
     char                       argc;
 
     bool           bIsOverlayInsert;
@@ -104,8 +146,9 @@ struct shell_obj {
 
 /* Global variables ------------------------------------------------*/
 /* Global function prototypes --------------------------------------*/
-extern void shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg);
+extern bool shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg);
 extern void shell_task(shell_obj_t *sh);
+extern void shell_task_on_callback(shell_obj_t *sh, char c);
 extern void shell_write(const shell_obj_t *sh, const char *buffer, int32_t nSize);
 
 #ifdef __cplusplus

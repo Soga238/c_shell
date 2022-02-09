@@ -20,20 +20,24 @@ extern "C" {
 #endif
 
 /* Global define ---------------------------------------------------*/
-#define SHELL_SHOW_INFORMATION          1
-#define SHELL_MAXIMUM_USERNAME_SIZE     16
+#define C_SHELL_SHOW_INFORMATION          1
+#define C_SHELL_MAXIMUM_USERNAME_SIZE     16
 
 /*! 包含命令名在内，命令行最大参数个数，不能小于 1 */
-#define SHELL_MAXIMUM_PARAM_NUMBER      3
-#if (SHELL_MAXIMUM_PARAM_NUMBER <= 0)
-#error "SHELL_MAXIMUM_PARAM_NUMBER < 0"
+#define C_SHELL_MAXIMUM_PARAM_NUMBER      3
+#if (C_SHELL_MAXIMUM_PARAM_NUMBER <= 0)
+#error "C_SHELL_MAXIMUM_PARAM_NUMBER < 0"
 #endif
 
 /*! 历史记录条数，建议不超过 5 */
-#define SHELL_MAXIMUM_HISTORY_NUMER     3
-#if (SHELL_MAXIMUM_HISTORY_NUMER > 0)
-    #define SHELL_HISTORY_ENABLED
+#define C_SHELL_MAXIMUM_HISTORY_NUMER     3
+#if (C_SHELL_MAXIMUM_HISTORY_NUMER > 0)
+    #define C_SHELL_HISTORY_ENABLE        1
+#else
+    #define C_SHELL_HISTORY_ENABLE        0
 #endif
+
+#define C_SHELL_EXPORT_COMMAND_ENABLE     1
 
 /* Global macro ----------------------------------------------------*/
 /* Global typedef --------------------------------------------------*/
