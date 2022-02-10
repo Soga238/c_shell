@@ -1,0 +1,6 @@
+load STM32H750VBTx 
+project name STCubeGenerated 
+project toolchain "MDK-ARM V5" 
+project path "F:\MCU_PROJECT\c_shell_sth7\projects\mdk\RTE\Device\STM32H750VBTx\" 
+set tpl_path "D:\Arm\Packs\Keil\STM32H7xx_DFP\2.8.0\MDK\CubeMX" 
+set dest_path "STM32H750VBTx" 
