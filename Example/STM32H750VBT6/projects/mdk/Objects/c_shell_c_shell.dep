@@ -8,27 +8,27 @@ I (D:\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x603507CA)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x60D3E8E2)
-I (..\..\..\..\..\c_shell\c_shell.h)(0x62038C9F)
+I (..\..\..\..\..\c_shell\c_shell.h)(0x620B76FF)
 I (..\..\..\..\..\c_shell\c_shell_cfg.h)(0x62038358)
 I (D:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x603507D0)
 I (..\..\usr_app\..\bsp\uart\uart.h)(0x61C95449)
 I (..\..\usr_app\..\bsp\uart\..\bsp_cfg.h)(0x61C954D5)
 F (..\..\usr_app\c_shell_commands.c)(0x6204600D)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/c_shell_commands.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
-I (..\..\..\..\..\c_shell\c_shell.h)(0x62038C9F)
+I (..\..\..\..\..\c_shell\c_shell.h)(0x620B76FF)
 I (..\..\..\..\..\c_shell\c_shell_cfg.h)(0x62038358)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x603507CA)
 I (D:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x603507D0)
-F (..\..\..\..\c_shell.c)(0x62038D57)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/c_shell.o -MD)
+F (..\..\..\..\c_shell.c)(0x620B76CA)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/c_shell.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
 I (D:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x603507D4)
-I (..\..\..\..\c_shell.h)(0x62038C9F)
-I (..\..\..\..\c_shell_cfg.h)(0x62038358)
+I (..\..\..\..\..\c_shell\c_shell.h)(0x620B76FF)
+I (..\..\..\..\..\c_shell\c_shell_cfg.h)(0x62038358)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x603507CA)
-F (..\..\..\..\c_shell.h)(0x62038C9F)()
+F (..\..\..\..\c_shell.h)(0x620B76FF)()
 F (..\..\..\..\c_shell_cfg.h)(0x62038358)()
 F (.\RTE\Device\STM32H750VBTx\STCubeGenerated\Src\main.c)(0x61CAB067)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/main.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
@@ -139,7 +139,7 @@ I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\RTX\Include\rtx_os.h)(0x60D3E8E2)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x603507D0)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x60D3E8E2)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\RTX\Include\rtx_def.h)(0x60D3E8E2)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\CMSIS\RTX_Config.h)(0x61CA8C3E)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\RTX\Include\rtx_evr.h)(0x60D3E8E2)
 F (RTE\CMSIS\RTX_Config.c)(0x5E8306CE)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/rtx_config.o -MD)
@@ -151,7 +151,7 @@ I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\RTX\Include\rtx_os.h)(0x60D3E8E2)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x603507D0)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x60D3E8E2)
 I (D:\Arm\ARM\CMSIS\5.8.0\CMSIS\RTOS2\RTX\Include\rtx_def.h)(0x60D3E8E2)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\CMSIS\RTX_Config.h)(0x61CA8C3E)
 F (RTE\CMSIS\RTX_Config.h)(0x61CA8C3E)()
 F (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\CMSIS\Driver\IrDA_STM32H7xx.c)(0x613962D4)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/irda_stm32h7xx.o -MD)
@@ -195,7 +195,7 @@ I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ha
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x60652FDC)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\Device\STM32H750VBTx\MX_Device.h)(0x61CAABB7)
 F (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\CMSIS\Driver\SmartCard_STM32H7xx.c)(0x613962D4)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/smartcard_stm32h7xx.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
@@ -238,7 +238,7 @@ I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ha
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x60652FDC)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\Device\STM32H750VBTx\MX_Device.h)(0x61CAABB7)
 F (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\CMSIS\Driver\UART_STM32H7xx.c)(0x613962D4)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/uart_stm32h7xx.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
@@ -281,7 +281,7 @@ I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ha
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x60652FDC)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\Device\STM32H750VBTx\MX_Device.h)(0x61CAABB7)
 F (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\CMSIS\Driver\USART_STM32H7xx.c)(0x613962D4)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/usart_stm32h7xx.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
@@ -324,7 +324,7 @@ I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ha
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pwr_ex.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x60652FDC)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x60652FDC)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 I (RTE\Device\STM32H750VBTx\MX_Device.h)(0x61CAABB7)
 F (D:\Arm\Keil\ARM_Compiler\1.6.3\Source\retarget_io.c)(0x584E29BE)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/retarget_io.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
@@ -334,7 +334,7 @@ I (D:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x603507D4)
 I (D:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\assert.h)(0x603507D0)
 I (D:\Keil_v5\ARM\ARMCLANG\include\rt_sys.h)(0x603507D4)
-I (RTE\_c_shell\RTE_Components.h)(0x62045EF1)
+I (RTE\_c_shell\RTE_Components.h)(0x620B64A6)
 F (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal.c)(0x60652FDC)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__RTX -gdwarf-4 -Oz -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-covered-switch-default -Wno-unreachable-code-break -I ../../../../../c_shell-I./RTE/CMSIS-I./RTE/Device/STM32H750VBTx-I./RTE/Device/STM32H750VBTx/STCubeGenerated-I./RTE/Device/STM32H750VBTx/STCubeGenerated/Inc-I./RTE/_c_shell-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Core/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/Driver/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/Include-ID:/Arm/ARM/CMSIS/5.8.0/CMSIS/RTOS2/RTX/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/CMSIS/Device/ST/STM32H7xx/Include-ID:/Arm/Keil/STM32H7xx_DFP/2.8.0/Drivers/STM32H7xx_HAL_Driver/Inc-D__UVISION_VERSION="535" -D_RTE_ -DSTM32H750xx -D_RTE_  -include "Pre_Include_Global.h"-o ./objects/stm32h7xx_hal.o -MD)
 I (RTE\_c_shell\Pre_Include_Global.h)(0x62045EF1)
 I (D:\Arm\Keil\STM32H7xx_DFP\2.8.0\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h)(0x60652FDC)

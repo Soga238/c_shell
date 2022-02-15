@@ -31,6 +31,15 @@ void test(shell_obj_t *sh, char argc, char *argv[])
     }
 }
 
+#if (0)
+void test_func2(shell_obj_t *sh, int argc, char *argv[])
+{
+    shell_write(sh, "\r\nfunc test2", sizeof("\r\nfunc test2"));
+}
+
+C_SHELL_EXPORT_COMMAND(test_func2, test_func2, 0, test_func2);
+#endif
+
 uint32_t read(char *buffer, uint32_t wSize)
 {
     return 0;

@@ -172,11 +172,12 @@ static void cursor_backspace(shell_obj_t *sh, int32_t nLength)
 static void parse_argv(shell_obj_t *sh)
 {
     char *token;
+    void *pRetutn = NULL;
 
     /*! strtok is not thread safety*/
 
     if (NULL != sh->lock) {
-        sh->lock(sh);
+        pRetutn = sh->lock(sh);
     }
 
     sh->argc = 0;
@@ -188,7 +189,7 @@ static void parse_argv(shell_obj_t *sh)
     } while (token && (sh->argc < COUNT_OF(sh->argv)));
 
     if (NULL != sh->unlock) {
-        sh->unlock(sh);
+        sh->unlock(sh, pRetutn);
     }
 }
 

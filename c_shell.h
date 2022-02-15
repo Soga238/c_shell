@@ -92,8 +92,8 @@ struct shell_cfg {
     uint32_t    ( *read    )(char *buffer, uint32_t wSize);
     uint32_t    ( *write   )(const char *buffer, uint32_t wSize);
     bool        ( *login   )(const char *username, const char *password);
-    void        ( *lock    )(void *sh);
-    void        ( *unlock  )(void *sh);
+    void *      ( *lock    )(void *sh);
+    void        ( *unlock  )(void *sh, void *pLockReturn);
 
     char                  *username;
     char                    *buffer;
@@ -111,8 +111,8 @@ struct shell_obj {
     uint32_t    ( *write   )(const char *buffer, uint32_t wSize);
     bool        ( *login   )(const char *username, const char *password);
 
-    void        ( *lock    )(void *sh);
-    void        ( *unlock  )(void *sh);
+    void *      ( *lock    )(void *sh);
+    void        ( *unlock  )(void *sh, void *pLockReturn);
 
     char                   username[C_SHELL_MAXIMUM_USERNAME_SIZE];
 
