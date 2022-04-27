@@ -20,8 +20,13 @@ extern "C" {
 #endif
 
 /* Global define ---------------------------------------------------*/
+#ifndef C_SHELL_SHOW_INFORMATION
 #define C_SHELL_SHOW_INFORMATION          1
+#endif
+
+#ifndef C_SHELL_MAXIMUM_USERNAME_SIZE
 #define C_SHELL_MAXIMUM_USERNAME_SIZE     16
+#endif
 
 /*! 包含命令名在内，命令行最大参数个数，不能小于 1 */
 #define C_SHELL_MAXIMUM_PARAM_NUMBER      3
@@ -37,8 +42,9 @@ extern "C" {
     #define C_SHELL_HISTORY_ENABLE        0
 #endif
 
-#define C_SHELL_EXPORT_COMMAND_ENABLE     1
-
+#ifndef C_SHELL_EXPORT_COMMAND_ENABLE
+#define C_SHELL_EXPORT_COMMAND_ENABLE     0
+#endif
 /* Global macro ----------------------------------------------------*/
 /* Global typedef --------------------------------------------------*/
 /* Global variables ------------------------------------------------*/

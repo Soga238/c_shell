@@ -58,7 +58,7 @@ extern "C" {
             .tType = SHELL_COMMAND_FN_PTR_MAIN,                         \
             .name = shell_command_name_##__NAME,                        \
             .desc = shell_command_desc_##__NAME,                        \
-            .pfnMain = __FUNC                                           \
+            .pfnMain = (__FUNC)                                         \
         }
 #else
     #define C_SHELL_EXPORT_COMMAND(__FUNC, __NAME, __ATTR, __DESC)
@@ -105,7 +105,6 @@ struct shell_cfg {
 #endif
 };
 
-typedef struct shell_obj shell_obj_t;
 struct shell_obj {
     uint32_t    ( *read    )(char *buffer, uint32_t wSize);
     uint32_t    ( *write   )(const char *buffer, uint32_t wSize);

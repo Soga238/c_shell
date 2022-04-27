@@ -34,6 +34,6 @@
 ".\objects\startup_stm32h750xx.o"
 ".\objects\system_stm32h7xx.o"
 --strict --scatter ".\Objects\c_shell.sct"
---keep=(section_command*) --summary_stderr --info summarysizes --map --load_addr_map_info --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --symbols
 --info sizes --info totals --info veneers
 --list ".\Listings\c_shell.map" -o .\Objects\c_shell.axf

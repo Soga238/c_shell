@@ -38,8 +38,8 @@ enum shell_ret_t {
         extern const unsigned int section_command$$Base;
         extern const unsigned int section_command$$Limit;
     #elif defined(__GNUC__)
-        extern const unsigned int _section_command_start;
-        extern const unsigned int _section_command_end;
+        extern const unsigned int _ld_command_start;
+        extern const unsigned int _ld_command_end;
     #endif
 #endif
 
@@ -67,8 +67,8 @@ static void on_key_right_arrow(shell_obj_t *sh);
 static void on_key_left_arrow(shell_obj_t *sh);
 static void on_key_backspace(shell_obj_t *sh);
 
-static void on_command_list_all(shell_obj_t *sh, char argc, char *argv[]);
-static void on_command_clear(shell_obj_t *sh, char argc, char *argv[]);
+static void on_command_list_all(shell_obj_t *sh, int argc, char *argv[]);
+static void on_command_clear(shell_obj_t *sh, int argc, char *argv[]);
 
 static const shell_command_t s_tCommands[9] = {
     {
@@ -172,12 +172,12 @@ static void cursor_backspace(shell_obj_t *sh, int32_t nLength)
 static void parse_argv(shell_obj_t *sh)
 {
     char *token;
-    void *pRetutn = NULL;
+    void *pReturn = NULL;
 
     /*! strtok is not thread safety*/
 
     if (NULL != sh->lock) {
-        pRetutn = sh->lock(sh);
+        pReturn = sh->lock(sh);
     }
 
     sh->argc = 0;
@@ -189,7 +189,7 @@ static void parse_argv(shell_obj_t *sh)
     } while (token && (sh->argc < COUNT_OF(sh->argv)));
 
     if (NULL != sh->unlock) {
-        sh->unlock(sh, pRetutn);
+        sh->unlock(sh, pReturn);
     }
 }
 
@@ -489,7 +489,7 @@ static inline void print_command(shell_obj_t *sh, const shell_command_t *ptCmd)
     write_bytes(sh, "\r\n", 2);
 }
 
-static void on_command_list_all(shell_obj_t *sh, char argc, char *argv[])
+static void on_command_list_all(shell_obj_t *sh, int argc, char *argv[])
 {
     UNUSED_PARAM(argc);
     UNUSED_PARAM(argv);
@@ -512,7 +512,7 @@ static void on_command_list_all(shell_obj_t *sh, char argc, char *argv[])
     }
 }
 
-static void on_command_clear(shell_obj_t *sh, char argc, char *argv[])
+static void on_command_clear(shell_obj_t *sh, int argc, char *argv[])
 {
     UNUSED_PARAM(argc);
     UNUSED_PARAM(argv);
@@ -602,8 +602,8 @@ bool shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
         sh->ptBase = (shell_command_t *)(&section_command$$Base);
         sh->nCommandNumber = ((unsigned)(&section_command$$Limit) - (unsigned)(&section_command$$Base)) / sizeof(shell_command_t);
     #elif defined(__GNUC__)
-        sh->ptBase = (shell_command_t *)(&_section_command_start);
-        sh->nCommandNumber = ((unsigned)(&_section_command_end) - (unsigned)(&_section_command_start)) / sizeof(shell_command_t);
+        sh->ptBase = (shell_command_t *)(&_ld_command_start);
+        sh->nCommandNumber = ((unsigned)(&_ld_command_end) - (unsigned)(&_ld_command_start)) / sizeof(shell_command_t);
     #else
         #error "nonsupport compiler"
     #endif
@@ -642,7 +642,7 @@ bool shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
 
         sh->bInited = true;
     }
-    
+
     return sh->bInited;
 }
 

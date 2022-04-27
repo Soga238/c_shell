@@ -4,7 +4,26 @@
 
 `c shell` 是一个运行在单片机环境下的嵌入式 `shell`, 只有最简单的注册命令，执行命令功能
 
-* 支持 `Left + Right + Up + Down + BackSpace + Insert`键盘按键
+* 支持 `Left + Right + Up + Down + BackSpace + Insert + Enter`键盘按键
+
+## 两种命令导出方式
+
+* 静态命令表
+
+将结构体 `shell_cfg_t` 中的 `ptBase` 和`nCommandNumber` 指向用户自己定义的命令表, 调用 `shell_init` 进行初始化。
+
+* 命令宏定义
+ 
+使用 `GCC` 编译时，需要在ld文件中的只读数据区添加:
+
+```c
+    . = ALIGN(4);
+    _ld_command_start = ABSOLUTE(.);
+    KEEP(*(section_command))
+    _ld_command_end = ABSOLUTE(.);
+```
+
+目的是把散落在各个文件的函数，都存储在链接文件中的 `section_command` 段内
 
 ## 使用方法
 
