@@ -560,7 +560,7 @@ void shell_task(shell_obj_t *sh)
 
     if (NULL != sh && sh->bInited) {
         wCount = NULL != sh->read ? sh->read(buffer, sizeof(buffer)) : 0;
-        for (i = 0; i < wCount; ++i) {
+        for (i = 0; i < wCount && i < sizeof(buffer); ++i) {
             shell_handler(sh, buffer[i]);
         }
     }
@@ -639,11 +639,12 @@ bool shell_init(shell_obj_t *sh, shell_cfg_t *ptCfg)
         sh->nControlCode = 0;
         sh->bIsOverlayInsert = false;
         sh->bIsLogin = false;
-
         sh->bInited = true;
+        
+        return true;
     }
-
-    return sh->bInited;
+    
+    return false;
 }
 
 /*************************** End of file ****************************/
